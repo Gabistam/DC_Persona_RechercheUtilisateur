@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction aux Personas et à la Recherche Utilisateur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .slide {
+            display: none;
+            min-height: 100vh;
+        }
+        .slide.active {
+            display: flex;
+        }
+        .quiz-option {
+            transition: all 0.3s ease;
+        }
+        .quiz-option:hover {
+            transform: translateX(4px);
+        }
+        .quiz-option.correct {
+            background-color: #10b981;
+            color: white;
+        }
+        .quiz-option.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <div class="fixed top-4 right-4 z-50 flex gap-2">
+        <button onclick="previousSlide()" class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition">←</button>
+        <button onclick="nextSlide()" class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition">→</button>
+        <span id="slideCounter" class="bg-gray-700 text-white px-4 py-2 rounded-lg">1/15</span>
+    </div>
+
+    <!-- Slide 1: Titre -->
+    <div class="slide active items-center justify-center bg-gradient-to-br from-blue-900 to-blue-700">
+        <div class="text-center text-white px-8">
+            <h1 class="text-6xl font-bold mb-8">Introduction aux Personas et à la Recherche Utilisateur</h1>
+            <p class="text-2xl mb-12 text-blue-100">Comprendre vos utilisateurs pour concevoir de meilleures expériences</p>
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8 max-w-2xl mx-auto">
+                <h2 class="text-3xl font-semibold mb-6">Objectifs d'apprentissage</h2>
+                <ul class="text-left text-xl space-y-4">
+                    <li>✓ Comprendre l'importance de la recherche utilisateur</li>
+                    <li>✓ Maîtriser les méthodes de recherche primaire et secondaire</li>
+                    <li>✓ Savoir créer des personas réalistes et documentés</li>
+                    <li>✓ Appliquer ces concepts à votre projet fil rouge</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Plan du cours -->
+    <div class="slide items-center justify-center bg-gray-50">
+        <div class="max-w-5xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12">Plan du cours</h2>
+            <div class="grid grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 border-l-4 border-blue-900">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4">Partie 1 : Recherche Utilisateur</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li>→ Pourquoi la recherche utilisateur ?</li>
+                        <li>→ Recherche primaire vs secondaire</li>
+                        <li>→ Méthodes qualitatives et quantitatives</li>
+                        <li>→ Analyser et synthétiser les données</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 border-l-4 border-orange-500">
+                    <h3 class="text-2xl font-bold text-orange-500 mb-4">Partie 2 : Personas</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li>→ Qu'est-ce qu'un persona ?</li>
+                        <li>→ Anatomie d'un persona réussi</li>
+                        <li>→ Des données aux personas</li>
+                        <li>→ Utiliser les personas en pratique</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 bg-blue-50 rounded-lg p-6 text-center">
+                <p class="text-gray-700 text-lg">Ce cours alterne théorie et validation des acquis pour garantir votre compréhension</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Introduction recherche utilisateur -->
+    <div class="slide items-center justify-center bg-white">
+        <div class="max-w-5xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-8">Pourquoi faire de la recherche utilisateur ?</h2>
+            <div class="grid grid-cols-2 gap-8 mb-8">
+                <div class="bg-red-50 rounded-xl p-6 border-2 border-red-200">
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">❌ Sans recherche</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li>• Vous concevez selon vos propres suppositions</li>
+                        <li>• Risque de fonctionnalités inutiles</li>
+                        <li>• Mauvaise expérience utilisateur</li>
+                        <li>• Perte de temps et d'argent</li>
+                        <li>• Faible taux d'adoption</li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 border-2 border-green-200">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4">✓ Avec recherche</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li>• Vous concevez pour de vrais besoins</li>
+                        <li>• Fonctionnalités pertinentes et utiles</li>
+                        <li>• Expérience centrée utilisateur</li>
+                        <li>• Investissement optimisé</li>
+                        <li>• Meilleure satisfaction et fidélisation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-blue-900 text-white rounded-xl p-8">
+                <p class="text-2xl font-semibold text-center">La recherche utilisateur transforme les hypothèses en certitudes et les opinions en données exploitables</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Types de recherche -->
+    <div class="slide items-center justify-center bg-gray-50">
+        <div class="max-w-5xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12">Les deux types de recherche</h2>
+            <div class="space-y-8">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-start gap-6">
+                        <div class="bg-blue-900 text-white text-3xl font-bold rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0">1</div>
+                        <div class="flex-1">
+                            <h3 class="text-3xl font-bold text-blue-900 mb-4">Recherche Primaire</h3>
+                            <p class="text-gray-700 text-lg mb-4">Vous collectez vous-même des données directement auprès de vos utilisateurs cibles.</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-blue-50 rounded-lg p-4">
+                                    <p class="font-semibold text-blue-900 mb-2">Méthodes :</p>
+                                    <ul class="text-gray-700 space-y-1">
+                                        <li>• Entretiens individuels</li>
+                                        <li>• Questionnaires en ligne</li>
+                                        <li>• Tests utilisateurs</li>
+                                        <li>• Observations terrain</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-blue-50 rounded-lg p-4">
+                                    <p class="font-semibold text-blue-900 mb-2">Avantages :</p>
+                                    <ul class="text-gray-700 space-y-1">
+                                        <li>✓ Données fraîches et pertinentes</li>
+                                        <li>✓ Adaptées à votre contexte</li>
+                                        <li>✓ Permet d'approfondir</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-start gap-6">
+                        <div class="bg-orange-500 text-white text-3xl font-bold rounded-full w-16 h-16 flex items-center justify-center flex-shrink-0">2</div>
+                        <div class="flex-1">
+                            <h3 class="text-3xl font-bold text-orange-500 mb-4">Recherche Secondaire</h3>
+                            <p class="text-gray-700 text-lg mb-4">Vous analysez des données déjà existantes collectées par d'autres organisations.</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-orange-50 rounded-lg p-4">
+                                    <p class="font-semibold text-orange-600 mb-2">Sources :</p>
+                                    <ul class="text-gray-700 space-y-1">
+                                        <li>• Études de marché publiées</li>
+                                        <li>• Rapports sectoriels</li>
+                                        <li>• Statistiques publiques (INSEE)</li>
+                                        <li>• Analyses concurrentielles</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-orange-50 rounded-lg p-4">
+                                    <p class="font-semibold text-orange-600 mb-2">Avantages :</p>
+                                    <ul class="text-gray-700 space-y-1">
+                                        <li>✓ Rapide et économique</li>
+                                        <li>✓ Vue d'ensemble du marché</li>
+                                        <li>✓ Données à grande échelle</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Recherche qualitative vs quantitative -->
+    <div class="slide items-center justify-center bg-white">
+        <div class="max-w-5xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12">Approches qualitative et quantitative</h2>
+            <div class="grid grid-cols-2 gap-8">
+                <div class="bg-purple-50 rounded-xl p-8 border-2 border-purple-200">
+                    <h3 class="text-3xl font-bold text-purple-700 mb-6">Recherche Qualitative</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="font-semibold text-purple-900 mb-2">Objectif :</p>
+                            <p class="text-gray-700">Comprendre le "pourquoi" et le "comment"</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-purple-900 mb-2">Méthodes :</p>
+                            <ul class="text-gray-700 space-y-2">
+                                <li>• Entretiens semi-directifs</li>
+                                <li>• Focus groups</li>
+                                <li>• Observations ethnographiques</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-purple-900 mb-2">Résultats :</p>
+                            <p class="text-gray-700">Insights profonds, motivations, émotions, comportements</p>
+                        </div>
+                        <div class="bg-purple-100 rounded-lg p-4">
+                            <p class="text-sm text-purple-900"><strong>Exemple :</strong> "Les utilisateurs abandonnent le panier car ils ne font pas confiance au site pour la sécurité de leurs données"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-teal-50 rounded-xl p-8 border-2 border-teal-200">
+                    <h3 class="text-3xl font-bold text-teal-700 mb-6">Recherche Quantitative</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="font-semibold text-teal-900 mb-2">Objectif :</p>
+                            <p class="text-gray-700">Mesurer et quantifier des comportements</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-teal-900 mb-2">Méthodes :</p>
+                            <ul class="text-gray-700 space-y-2">
+                                <li>• Questionnaires à grande échelle</li>
+                                <li>• Analytics web</li>
+                                <li>• Tests A/B</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-teal-900 mb-2">Résultats :</p>
+                            <p class="text-gray-700">Données chiffrées, statistiques, tendances</p>
+                        </div>
+                        <div class="bg-teal-100 rounded-lg p-4">
+                            <p class="text-sm text-teal-900"><strong>Exemple :</strong> "65% des utilisateurs abandonnent le panier à l'étape de paiement"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-gray-100 rounded-lg p-6 text-center">
+                <p class="text-gray-700 text-lg"><strong>Conseil professionnel :</strong> Combinez les deux approches pour une compréhension complète</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Méthodes de recherche primaire -->
+    <div class="slide items-center justify-center bg-gray-50">
+        <div class="max-w-6xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12">Méthodes de recherche primaire</h2>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">Entretiens utilisateurs</h3>
+                    <p class="text-gray-700 mb-3">Conversations en profondeur avec des utilisateurs individuels</p>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <p><strong>Quand :</strong> Phase exploratoire, besoins peu connus</p>
+                        <p><strong>Durée :</strong> 30-60 minutes par personne</p>
+                        <p><strong>Nombre :</strong> 5-10 participants suffisent</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">Questionnaires en ligne</h3>
+                    <p class="text-gray-700 mb-3">Collecte de données auprès d'un grand nombre d'utilisateurs</p>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <p><strong>Quand :</strong> Valider des hypothèses à grande échelle</p>
+                        <p><strong>Outils :</strong> Google Forms, Typeform, SurveyMonkey</p>
+                        <p><strong>Nombre :</strong> 100+ répondants idéalement</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">Tests utilisateurs</h3>
+                    <p class="text-gray-700 mb-3">Observer des utilisateurs accomplir des tâches réelles</p>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <p><strong>Quand :</strong> Tester une maquette ou un prototype</p>
+                        <p><strong>Format :</strong> En présentiel ou à distance</p>
+                        <p><strong>Nombre :</strong> 5 utilisateurs détectent 85% des problèmes</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">Observations terrain</h3>
+                    <p class="text-gray-700 mb-3">Observer les utilisateurs dans leur environnement naturel</p>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <p><strong>Quand :</strong> Comprendre le contexte d'utilisation</p>
+                        <p><strong>Approche :</strong> Ethnographie, shadowing</p>
+                        <p><strong>Avantage :</strong> Découvrir des besoins non exprimés</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-blue-100 rounded-lg p-6">
+                <p class="text-gray-800 text-center"><strong>Pour votre projet :</strong> Privilégiez les questionnaires (rapidité) et 2-3 entretiens (profondeur)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Analyser les données -->
+    <div class="slide items-center justify-center bg-white">
+        <div class="max-w-5xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12">Analyser et synthétiser les données</h2>
+            <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                    <div class="bg-blue-900 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-xl">1</div>
+                    <div class="flex-1 bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Organiser vos données</h3>
+                        <p class="text-gray-700">Centralisez toutes vos notes, enregistrements et réponses dans un outil collaboratif (Notion, Miro, Excel).</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="bg-blue-900 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-xl">2</div>
+                    <div class="flex-1 bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Identifier les patterns</h3>
+                        <p class="text-gray-700">Recherchez les comportements, besoins et frustrations qui reviennent régulièrement. Notez les citations marquantes.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="bg-blue-900 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-xl">3</div>
+                    <div class="flex-1 bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Catégoriser par thèmes</h3>
+                        <p class="text-gray-700">Regroupez les insights par catégories : motivations, freins, contexte d'usage, attentes fonctionnelles, etc.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="bg-blue-900 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-xl">4</div>
+                    <div class="flex-1 bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Prioriser les insights</h3>
+                        <p class="text-gray-700">Tous les retours ne se valent pas. Concentrez-vous sur les insights récurrents et alignés avec vos objectifs projet.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-400 p-6">
+                <p class="text-gray-800"><strong>⚠️ Attention :</strong> Ne tombez pas dans le piège de la sur-analyse. Votre objectif est d'extraire des insights actionnables, pas d'analyser chaque virgule.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: QCM 1 -->
+    <div class="slide items-center justify-center bg-gradient-to-br from-blue-900 to-blue-700">
+        <div class="max-w-4xl mx-auto px-8 w-full">
+            <div class="bg-white rounded-2xl shadow-2xl p-8">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8 text-center">Quiz 1 : Recherche Utilisateur</h2>
+                <div id="quiz1" class="space-y-6"></div>
+                <div class="mt-8 flex justify-between items-center">
+                    <div id="quiz1-score" class="text-2xl font-bold text-gray-700"></div>
+                    <button onclick="resetQuiz(1)" class="bg-blue-900 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition">Recommencer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Qu'est-ce qu'un persona -->
+    <div class="slide items-center justify-center bg-gray-50">
+        <div class="max-w-5xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-8">Qu'est-ce qu'un persona ?</h2>
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <p class="text-2xl text-gray-700 leading-relaxed mb-6">
+                    Un <strong class="text-orange-600">persona</strong> est une représentation semi-fictive de votre utilisateur idéal, 
+                    basée sur des données réelles issues de votre recherche utilisateur.
+                </p>
+                <div class="bg-orange-50 rounded-lg p-6">
+                    <p class="text-lg text-gray-800">C'est un outil qui humanise vos données et vous aide à prendre des décisions de conception centrées sur l'utilisateur.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-8">
+                <div class="bg-green-50 rounded-xl p-6 border-2 border-green-200">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4">✓ Un bon persona</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Basé sur des données réelles</li>
+                        <li>• Représente un segment d'utilisateurs</li>
+                        <li>• Contient des détails concrets</li>
+                        <li>• Aide à la prise de décision</li>
+                        <li>• Se concentre sur les comportements</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50 rounded-xl p-6 border-2 border-red-200">
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">✗ Un mauvais persona</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Basé sur des suppositions</li>
+                        <li>• Trop générique ou stéréotypé</li>
+                        <li>• Rempli de détails inutiles</li>
+                        <li>• N'aide pas à décider</li>
+                        <li>• Se concentre sur la démographie</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Anatomie d'un persona -->
+    <div class="slide items-center justify-center bg-white">
+        <div class="max-w-6xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12">Anatomie d'un persona réussi</h2>
+            <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-8 border-2 border-orange-200">
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="col-span-1 text-center">
+                        <div class="bg-orange-500 w-32 h-32 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-4xl font-bold">Photo</div>
+                        <h3 class="text-2xl font-bold text-gray-900">Marie Dupont</h3>
+                        <p class="text-gray-600">32 ans, Paris</p>
+                        <p class="text-gray-600">Chef de projet digital</p>
+                    </div>
+                    <div class="col-span-2 space-y-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">📊 Profil démographique</h4>
+                            <p class="text-gray-700 text-sm">Âge, localisation, profession, niveau d'éducation, situation familiale</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">🎯 Objectifs</h4>
+                            <p class="text-gray-700 text-sm">"Je veux optimiser la gestion de mes projets web pour gagner du temps"</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">😤 Frustrations</h4>
+                            <p class="text-gray-700 text-sm">"Les outils actuels sont trop complexes et pas adaptés à mes besoins"</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">💡 Motivations</h4>
+                            <p class="text-gray-700 text-sm">Efficacité, simplicité, collaboration en équipe</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-2">💻 Comportement digital</h4>
+                            <p class="text-gray-700 text-sm">Utilise quotidiennement Notion, Slack, Figma. Préfère les interfaces épurées</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 grid grid-cols-3 gap-6">
+                <div class="bg-blue-50 rounded-lg p-4 text-center">
+                    <p class="font-bold text-blue-900 mb-2">Citation</p>
+                    <p class="text-sm text-gray-700">"J'ai besoin d'un outil qui me comprend"</p>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4 text-center">
+                    <p class="font-bold text-purple-900 mb-2">Personnalité</p>
+                    <p class="text-sm text-gray-700">Organisée, pragmatique, orientée résultats</p>
+                </div>
+                <div class="bg-green-50 rounded-lg p-4 text-center">
+                    <p class="font-bold text-green-900 mb-2">Expertise tech</p>
+                    <p class="text-sm text-gray-700">Avancée - Early adopter</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Combien de personas -->
+    <div class="slide items-center justify-center bg-gray-50">
+        <div class="max-w-5xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12">Combien de personas créer ?</h2>
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="text-center mb-8">
+                    <p class="text-6xl font-bold text-blue-900 mb-4">3 à 5</p>
+                    <p class="text-2xl text-gray-700">C'est le nombre idéal pour la plupart des projets</p>
+                </div>
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="bg-red-50 rounded-lg p-6 text-center">
+                        <p class="text-4xl mb-3">⚠️</p>
+                        <p class="font-bold text-red-700 mb-2">Trop peu (1-2)</p>
+                        <p class="text-sm text-gray-700">Risque de ne pas couvrir la diversité de vos utilisateurs</p>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-6 text-center border-2 border-green-400">
+                        <p class="text-4xl mb-3">✓</p>
+                        <p class="font-bold text-green-700 mb-2">Idéal (3-5)</p>
+                        <p class="text-sm text-gray-700">Équilibre entre diversité et praticité d'utilisation</p>
+                    </div>
+                    <div class="bg-red-50 rounded-lg p-6 text-center">
+                        <p class="text-4xl mb-3">⚠️</p>
+                        <p class="font-bold text-red-700 mb-2">Trop (6+)</p>
+                        <p class="text-sm text-gray-700">Difficile à mémoriser et à utiliser efficacement</p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <h3 class="font-bold text-blue-900 mb-3">Hiérarchisez vos personas :</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><strong>Persona primaire :</strong> Votre cible principale - c'est pour lui que vous concevez en priorité</li>
+                        <li><strong>Personas secondaires :</strong> Cibles importantes mais moins critiques</li>
+                        <li><strong>Personas tertiaires :</strong> À garder en tête mais pas prioritaires</li>
+                    </ul>
+                </div>
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6">
+                    <p class="text-gray-800"><strong>Pour votre projet :</strong> Vous créerez 3 personas représentant vos segments utilisateurs clés</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Des données aux personas -->
+    <div class="slide items-center justify-center bg-white">
+        <div class="max-w-5xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12">Transformer vos données en personas</h2>
+            <div class="space-y-6">
+                <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border-l-4 border-blue-900">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="bg-blue-900 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">1</span>
+                        <h3 class="text-2xl font-bold text-gray-900">Segmentez vos utilisateurs</h3>
+                    </div>
+                    <p class="text-gray-700 ml-14">Identifiez les groupes d'utilisateurs qui partagent des comportements, objectifs ou frustrations similaires.</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-6 border-l-4 border-purple-600">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">2</span>
+                        <h3 class="text-2xl font-bold text-gray-900">Nommez et humanisez</h3>
+                    </div>
+                    <p class="text-gray-700 ml-14">Donnez un nom, un visage et une histoire à chaque segment. Cela aide votre équipe à s'identifier à ces personnes.</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 border-l-4 border-green-600">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">3</span>
+                        <h3 class="text-2xl font-bold text-gray-900">Détaillez avec vos données</h3>
+                    </div>
+                    <p class="text-gray-700 ml-14">Remplissez chaque section du persona avec les insights réels de votre recherche. Citez vos utilisateurs.</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-6 border-l-4 border-orange-500">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">4</span>
+                        <h3 class="text-2xl font-bold text-gray-900">Validez avec l'équipe</h3>
+                    </div>
+                    <p class="text-gray-700 ml-14">Présentez vos personas à l'équipe projet. Les personas doivent être reconnus comme réalistes et utiles.</p>
+                </div>
+            </div>
+            <div class="mt-8 bg-gray-100 rounded-lg p-6">
+                <p class="text-gray-800 text-center text-lg"><strong>Astuce :</strong> Utilisez des templates (Figma, Miro, Canva) pour gagner du temps sur la mise en forme</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13: Utiliser les personas -->
+    <div class="slide items-center justify-center bg-gray-50">
+        <div class="max-w-5xl mx-auto px-8">
+            <h2 class="text-5xl font-bold text-gray-900 mb-12">Utiliser les personas en pratique</h2>
+            <div class="grid grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4">📐 En conception</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li>• "Est-ce que Marie aurait besoin de cette fonctionnalité ?"</li>
+                        <li>• "Comment Thomas naviguerait dans ce menu ?"</li>
+                        <li>• Prioriser les fonctionnalités selon les personas</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4">✍️ En rédaction</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li>• Adapter le ton et le vocabulaire</li>
+                        <li>• "Marie apprécierait un ton professionnel et concis"</li>
+                        <li>• Répondre aux objections de chaque persona</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4">🎨 En design</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li>• Choisir des visuels qui parlent au persona</li>
+                        <li>• Adapter la complexité de l'interface</li>
+                        <li>• Respecter les préférences d'accessibilité</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4">🧪 En test</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li>• Recruter des testeurs qui ressemblent aux personas</li>
+                        <li>• Créer des scénarios basés sur leurs objectifs</li>
+                        <li>• Évaluer selon leurs critères de réussite</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-blue-900 text-white rounded-xl p-8">
+                <p class="text-2xl font-semibold text-center">Les personas transforment "l'utilisateur" abstrait en personnes réelles pour qui vous concevez</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14: QCM 2 -->
+    <div class="slide items-center justify-center bg-gradient-to-br from-orange-600 to-orange-500">
+        <div class="max-w-4xl mx-auto px-8 w-full">
+            <div class="bg-white rounded-2xl shadow-2xl p-8">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8 text-center">Quiz 2 : Les Personas</h2>
+                <div id="quiz2" class="space-y-6"></div>
+                <div class="mt-8 flex justify-between items-center">
+                    <div id="quiz2-score" class="text-2xl font-bold text-gray-700"></div>
+                    <button onclick="resetQuiz(2)" class="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition">Recommencer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 15: Synthèse et transition -->
+    <div class="slide items-center justify-center bg-gradient-to-br from-blue-900 to-purple-900">
+        <div class="max-w-5xl mx-auto px-8 text-white">
+            <h2 class="text-5xl font-bold mb-12 text-center">Synthèse : De la recherche aux personas</h2>
+            <div class="grid grid-cols-3 gap-8 mb-12">
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                    <p class="text-5xl mb-4">🔍</p>
+                    <h3 class="text-2xl font-bold mb-3">Rechercher</h3>
+                    <p class="text-blue-100">Collectez des données réelles auprès de vos utilisateurs cibles</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                    <p class="text-5xl mb-4">📊</p>
+                    <h3 class="text-2xl font-bold mb-3">Analyser</h3>
+                    <p class="text-blue-100">Identifiez les patterns et segmentez vos utilisateurs</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                    <p class="text-5xl mb-4">👥</p>
+                    <h3 class="text-2xl font-bold mb-3">Créer</h3>
+                    <p class="text-blue-100">Transformez vos insights en personas exploitables</p>
+                </div>
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm rounded-xl p-8 mb-8">
+                <h3 class="text-3xl font-bold mb-6 text-center">Points clés à retenir</h3>
+                <ul class="space-y-3 text-lg text-blue-50">
+                    <li>✓ La recherche utilisateur est indispensable pour concevoir des solutions pertinentes</li>
+                    <li>✓ Combinez recherche primaire et secondaire, qualitative et quantitative</li>
+                    <li>✓ Les personas humanisent vos données et guident vos décisions de conception</li>
+                    <li>✓ Créez 3 personas basés sur des segments utilisateurs réels</li>
+                    <li>✓ Utilisez vos personas tout au long du processus de conception</li>
+                </ul>
+            </div>
+            <div class="bg-yellow-400 text-gray-900 rounded-xl p-8 text-center">
+                <h3 class="text-3xl font-bold mb-4">À vous de jouer !</h3>
+                <p class="text-xl mb-4">Passez maintenant aux exercices pratiques pour appliquer ces concepts à votre projet</p>
+                <p class="text-lg opacity-80">📄 Consultez le document "cours_20250119_matin_pratique.md"</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Quiz data
+        const quizData = {
+            1: [
+                {
+                    question: "Quelle est la principale différence entre recherche primaire et recherche secondaire ?",
+                    answers: [
+                        { text: "La recherche primaire coûte plus cher que la recherche secondaire", correct: false },
+                        { text: "La recherche primaire collecte des données nouvelles directement auprès des utilisateurs", correct: true },
+                        { text: "La recherche secondaire est toujours plus fiable", correct: false },
+                        { text: "La recherche primaire ne concerne que les questionnaires en ligne", correct: false }
+                    ]
+                },
+                {
+                    question: "Pourquoi la recherche utilisateur est-elle essentielle en conception web ?",
+                    answers: [
+                        { text: "Pour impressionner le client avec des graphiques", correct: false },
+                        { text: "Pour concevoir selon des besoins réels plutôt que des suppositions", correct: true },
+                        { text: "Parce que c'est obligatoire légalement", correct: false },
+                        { text: "Pour augmenter le budget du projet", correct: false }
+                    ]
+                },
+                {
+                    question: "Combien d'utilisateurs sont généralement suffisants pour détecter 85% des problèmes d'utilisabilité lors de tests utilisateurs ?",
+                    answers: [
+                        { text: "2 utilisateurs", correct: false },
+                        { text: "5 utilisateurs", correct: true },
+                        { text: "15 utilisateurs", correct: false },
+                        { text: "50 utilisateurs", correct: false }
+                    ]
+                },
+                {
+                    question: "Quelle méthode appartient à la recherche qualitative ?",
+                    answers: [
+                        { text: "Questionnaire à grande échelle avec 500 répondants", correct: false },
+                        { text: "Analyse des statistiques Google Analytics", correct: false },
+                        { text: "Tests A/B sur le site web", correct: false },
+                        { text: "Entretiens semi-directifs en profondeur", correct: true }
+                    ]
+                },
+                {
+                    question: "Quel est l'objectif principal de la recherche quantitative ?",
+                    answers: [
+                        { text: "Comprendre les motivations profondes des utilisateurs", correct: false },
+                        { text: "Mesurer et quantifier des comportements à grande échelle", correct: true },
+                        { text: "Observer les utilisateurs dans leur environnement naturel", correct: false },
+                        { text: "Créer des personas détaillés", correct: false }
+                    ]
+                },
+                {
+                    question: "Lors de l'analyse de données de recherche, quelle est la première étape recommandée ?",
+                    answers: [
+                        { text: "Créer immédiatement les personas", correct: false },
+                        { text: "Organiser et centraliser toutes les données collectées", correct: true },
+                        { text: "Présenter les résultats au client", correct: false },
+                        { text: "Supprimer les données non pertinentes", correct: false }
+                    ]
+                }
+            ],
+            2: [
+                {
+                    question: "Qu'est-ce qu'un persona ?",
+                    answers: [
+                        { text: "Une liste de fonctionnalités à développer", correct: false },
+                        { text: "Un personnage fictif inventé pour le marketing", correct: false },
+                        { text: "Une représentation semi-fictive d'un utilisateur idéal basée sur des données réelles", correct: true },
+                        { text: "Un sondage envoyé aux utilisateurs", correct: false }
+                    ]
+                },
+                {
+                    question: "Combien de personas est-il recommandé de créer pour un projet web standard ?",
+                    answers: [
+                        { text: "1 seul pour rester focalisé", correct: false },
+                        { text: "3 à 5 personas", correct: true },
+                        { text: "10 personas minimum", correct: false },
+                        { text: "Autant que possible pour couvrir tous les cas", correct: false }
+                    ]
+                },
+                {
+                    question: "Quel élément est le PLUS important dans un persona ?",
+                    answers: [
+                        { text: "Sa photo et son prénom", correct: false },
+                        { text: "Son âge exact et son salaire", correct: false },
+                        { text: "Ses objectifs, motivations et frustrations liés au projet", correct: true },
+                        { text: "Sa marque de voiture et ses hobbies", correct: false }
+                    ]
+                },
+                {
+                    question: "Un bon persona doit être basé sur :",
+                    answers: [
+                        { text: "L'intuition du chef de projet", correct: false },
+                        { text: "Les stéréotypes démographiques classiques", correct: false },
+                        { text: "Des données réelles issues de recherche utilisateur", correct: true },
+                        { text: "Les préférences personnelles du designer", correct: false }
+                    ]
+                },
+                {
+                    question: "Comment doit-on hiérarchiser les personas ?",
+                    answers: [
+                        { text: "Du plus jeune au plus âgé", correct: false },
+                        { text: "En personas primaires, secondaires et tertiaires selon leur importance stratégique", correct: true },
+                        { text: "Du plus riche au moins riche", correct: false },
+                        { text: "Par ordre alphabétique", correct: false }
+                    ]
+                },
+                {
+                    question: "À quel moment utilise-t-on les personas dans un projet ?",
+                    answers: [
+                        { text: "Uniquement au début du projet pour définir la cible", correct: false },
+                        { text: "Seulement pendant la phase de design", correct: false },
+                        { text: "Tout au long du projet : conception, rédaction, design, tests", correct: true },
+                        { text: "Uniquement pour présenter le projet au client", correct: false }
+                    ]
+                }
+            ]
+        };
+
+        function updateSlideCounter() {
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1}/${totalSlides}`;
+        }
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            updateSlideCounter();
+            
+            // Initialize quiz if on quiz slide
+            if (currentSlide === 7) initQuiz(1);
+            if (currentSlide === 13) initQuiz(2);
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+
+        // Quiz functions
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function initQuiz(quizNumber) {
+            const quizContainer = document.getElementById(`quiz${quizNumber}`);
+            const scoreContainer = document.getElementById(`quiz${quizNumber}-score`);
+            quizContainer.innerHTML = '';
+            scoreContainer.textContent = '';
+
+            const questions = quizData[quizNumber];
+            
+            questions.forEach((q, qIndex) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'bg-gray-50 rounded-lg p-6';
+                
+                const questionTitle = document.createElement('h3');
+                questionTitle.className = 'text-xl font-bold text-gray-900 mb-4';
+                questionTitle.textContent = `${qIndex + 1}. ${q.question}`;
+                questionDiv.appendChild(questionTitle);
+
+                const shuffledAnswers = shuffleArray(q.answers);
+                
+                shuffledAnswers.forEach((answer, aIndex) => {
+                    const answerBtn = document.createElement('button');
+                    answerBtn.className = 'quiz-option w-full text-left p-4 mb-2 bg-white rounded-lg border-2 border-gray-200 hover:border-blue-400 transition';
+                    answerBtn.textContent = answer.text;
+                    answerBtn.onclick = () => checkAnswer(quizNumber, qIndex, answer.correct, answerBtn);
+                    questionDiv.appendChild(answerBtn);
+                });
+
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function checkAnswer(quizNumber, questionIndex, isCorrect, button) {
+            const questionDiv = button.parentElement;
+            const buttons = questionDiv.querySelectorAll('.quiz-option');
+            
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.cursor = 'not-allowed';
+            });
+
+            if (isCorrect) {
+                button.classList.add('correct');
+            } else {
+                button.classList.add('incorrect');
+                buttons.forEach(btn => {
+                    const answerText = btn.textContent;
+                    const correctAnswer = quizData[quizNumber][questionIndex].answers.find(a => a.correct);
+                    if (btn.textContent === correctAnswer.text) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            updateScore(quizNumber);
+        }
+
+        function updateScore(quizNumber) {
+            const quizContainer = document.getElementById(`quiz${quizNumber}`);
+            const scoreContainer = document.getElementById(`quiz${quizNumber}-score`);
+            const questions = quizContainer.querySelectorAll('.bg-gray-50');
+            
+            let correct = 0;
+            questions.forEach(q => {
+                if (q.querySelector('.correct')) {
+                    const incorrectBtn = q.querySelector('.incorrect');
+                    if (!incorrectBtn) correct++;
+                }
+            });
+
+            const total = quizData[quizNumber].length;
+            const allAnswered = quizContainer.querySelectorAll('.quiz-option.correct, .quiz-option.incorrect').length >= total;
+            
+            if (allAnswered) {
+                scoreContainer.textContent = `Score : ${correct}/${total}`;
+                if (correct === total) {
+                    scoreContainer.textContent += ' - Parfait ! 🎉';
+                } else if (correct >= total * 0.7) {
+                    scoreContainer.textContent += ' - Très bien ! 👏';
+                } else {
+                    scoreContainer.textContent += ' - À revoir 📚';
+                }
+            }
+        }
+
+        function resetQuiz(quizNumber) {
+            initQuiz(quizNumber);
+        }
+
+        // Initialize
+        updateSlideCounter();
+    </script>
+</body>
+</html>
